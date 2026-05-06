@@ -19,9 +19,7 @@ class CarService implements CarServiceInterface
     public function __construct(
         protected GatewayCarInterface    $gatewayCar,
         protected LoggerServiceInterface $loggerService,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @return CarCatalogInterface

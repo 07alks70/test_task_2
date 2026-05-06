@@ -16,15 +16,11 @@ class CarResponseDTO extends Data
      */
     public function __construct(
         #[Rule(['nullable', 'string'])]
-        public null|string     $name,
-
+        public ?string     $name,
         #[Rule(['nullable', 'string'])]
-        public null|string     $country,
-
+        public ?string     $country,
         #[Rule(['nullable'])]
         #[DataCollectionOf(CarModelResponseDTO::class)]
         public ?DataCollection $models,
-    )
-    {
-    }
+    ) {}
 }

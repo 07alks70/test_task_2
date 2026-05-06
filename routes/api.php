@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group([
-    'prefix' => '/car'
+    'prefix' => '/car',
 ], function () {
-   Route::get('/', [CarController::class, 'carList']);
+    Route::get('/', [CarController::class, 'carList']);
 });

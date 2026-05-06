@@ -17,9 +17,7 @@ class ApiCarBase implements GatewayCarInterface
      */
     public function __construct(
         protected LoggerServiceInterface $loggerService,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @return Collection<int, CarResponseDTO>

@@ -12,6 +12,7 @@ class CarController extends Controller
 {
     use ResponseTrait;
 
+    protected const CACHE_VERSION = 1;
     protected const CACHE_TTL = 60;
 
     /**
@@ -19,9 +20,7 @@ class CarController extends Controller
      */
     public function __construct(
         protected CarServiceInterface $carService,
-    )
-    {
-    }
+    ) {}
 
     /**
      * @param Request $request
@@ -29,7 +28,7 @@ class CarController extends Controller
      */
     public function carList(Request $request): JsonResponse
     {
-        $cacheKey = 'cars_catalog_' . ($request->get('page', 1));
+        $cacheKey = sprintf('cars_catalog_%s_v%1', $request->get('page', 1), self::CACHE_VERSION);
 
         $data = Cache::remember($cacheKey, now()->addMinutes(self::CACHE_TTL), function () {
             return $this->carService
