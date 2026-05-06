@@ -30,6 +30,7 @@ class SyncCarsJob implements ShouldQueue
     public function handle(CarServiceInterface $carService): void
     {
         $carService->synchronization()
-            ->syncCars();
+            ->syncCars()
+        ;
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property LoggerTypeEnum $enum
- * @property string $message
+ * @property string         $message
  */
 class Logger extends Model
 {

@@ -5,6 +5,11 @@ namespace App\Console\Commands;
 use App\Domains\Cars\Services\CarService\Interfaces\CarServiceInterface;
 use Illuminate\Console\Command;
 
+/**
+ * @internal
+ *
+ * @coversNothing
+ */
 class Test extends Command
 {
     /**
@@ -27,6 +32,7 @@ class Test extends Command
     public function handle(CarServiceInterface $carService): void
     {
         $carService->synchronization()
-            ->syncCars();
+            ->syncCars()
+        ;
     }
 }

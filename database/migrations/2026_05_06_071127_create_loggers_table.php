@@ -2,11 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class () extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,12 +15,12 @@ return new class extends Migration {
             $table->string('type');
             $table->text('message');
             $table->boolean('active')
-                ->default(false);
+                ->default(false)
+            ;
             $table->timestamps();
 
             $table->fullText('message');
         });
-
     }
 
     /**

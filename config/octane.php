@@ -24,7 +24,6 @@ use Laravel\Octane\Listeners\StopWorkerIfNecessary;
 use Laravel\Octane\Octane;
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Octane Server
@@ -73,12 +72,9 @@ return [
         RequestReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
             ...Octane::prepareApplicationForNextRequest(),
-            //
         ],
 
-        RequestHandled::class => [
-            //
-        ],
+        RequestHandled::class => [],
 
         RequestTerminated::class => [
             // FlushUploadedFiles::class,
@@ -86,21 +82,15 @@ return [
 
         TaskReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
-            //
         ],
 
-        TaskTerminated::class => [
-            //
-        ],
+        TaskTerminated::class => [],
 
         TickReceived::class => [
             ...Octane::prepareApplicationForNextOperation(),
-            //
         ],
 
-        TickTerminated::class => [
-            //
-        ],
+        TickTerminated::class => [],
 
         OperationTerminated::class => [
             FlushOnce::class,
@@ -134,9 +124,7 @@ return [
         ...Octane::defaultServicesToWarm(),
     ],
 
-    'flush' => [
-        //
-    ],
+    'flush' => [],
 
     /*
     |--------------------------------------------------------------------------
@@ -220,5 +208,4 @@ return [
     */
 
     'max_execution_time' => 30,
-
 ];

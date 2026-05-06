@@ -11,11 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * @property string $name
- * @property int $country_id
- * @property boolean $active
- * @property Country $country
+ * @property string                    $name
+ * @property int                       $country_id
+ * @property bool                      $active
+ * @property Country                   $country
  * @property Collection<int, CarModel> $car_models
+ *
  * @method static Builder active()
  */
 class Car extends Model
@@ -32,9 +33,6 @@ class Car extends Model
         'active',
     ];
 
-    /**
-     * @return HasMany
-     */
     public function car_models(): HasMany
     {
         return $this->hasMany(CarModel::class, 'car_id', 'id');

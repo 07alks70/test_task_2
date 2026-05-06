@@ -12,12 +12,10 @@ use Spatie\LaravelData\DataCollection;
 
 class ApiCarBase implements GatewayCarInterface
 {
-    /**
-     * @param LoggerServiceInterface $loggerService
-     */
     public function __construct(
         protected LoggerServiceInterface $loggerService,
-    ) {}
+    ) {
+    }
 
     /**
      * @return Collection<int, CarResponseDTO>
@@ -25,7 +23,8 @@ class ApiCarBase implements GatewayCarInterface
     public function getData(): Collection
     {
         $response = Http::withHeaders($this->getRequestHeaders())
-            ->get($this->getApiEndpoint());
+            ->get($this->getApiEndpoint())
+        ;
 
         if (!$response->successful()) {
             $this->loggerService
@@ -36,12 +35,12 @@ class ApiCarBase implements GatewayCarInterface
                             'http_code' => $response->status(),
                             'response_readers' => $response->headers(),
                             'request_header' => $this->getRequestHeaders(),
-
                         ],
                         JSON_UNESCAPED_UNICODE
                     ),
                     LoggerTypeEnum::SYNC_CARS_GET_REQUEST,
-                );
+                )
+            ;
 
             return new Collection();
         }
@@ -57,12 +56,12 @@ class ApiCarBase implements GatewayCarInterface
                             'http_code' => $response->status(),
                             'response_readers' => $response->headers(),
                             'request_header' => $this->getRequestHeaders(),
-
                         ],
                         JSON_UNESCAPED_UNICODE
                     ),
                     LoggerTypeEnum::SYNC_CARS_INVALID_DATA,
-                );
+                )
+            ;
 
             return new Collection();
         }
@@ -76,12 +75,12 @@ class ApiCarBase implements GatewayCarInterface
                             'http_code' => $response->status(),
                             'response_readers' => $response->headers(),
                             'request_header' => $this->getRequestHeaders(),
-
                         ],
                         JSON_UNESCAPED_UNICODE
                     ),
                     LoggerTypeEnum::SYNC_CARS_EMPTY_DATA,
-                );
+                )
+            ;
 
             return new Collection();
         }
@@ -89,14 +88,9 @@ class ApiCarBase implements GatewayCarInterface
         $dtoCollection = new DataCollection(CarResponseDTO::class, $dataDecoded['data']);
 
         /** @var Collection $collection */
-        $collection = $dtoCollection->toCollection();
-
-        return $collection;
+        return $dtoCollection->toCollection();
     }
 
-    /**
-     * @return string|null
-     */
     private function getApiEndpoint(): ?string
     {
         // Вообще можно сделать сервис настроек с системой кэширования и вынести их в адмнку, но тк это тех. задание, то просто из config.

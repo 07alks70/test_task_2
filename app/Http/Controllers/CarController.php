@@ -15,25 +15,20 @@ class CarController extends Controller
     protected const CACHE_VERSION = 1;
     protected const CACHE_TTL = 60;
 
-    /**
-     * @param CarServiceInterface $carService
-     */
     public function __construct(
         protected CarServiceInterface $carService,
-    ) {}
+    ) {
+    }
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
     public function carList(Request $request): JsonResponse
     {
-        $cacheKey = sprintf('cars_catalog_%s_v%1', $request->get('page', 1), self::CACHE_VERSION);
+        $cacheKey = sprintf('cars_catalog_%s_v%s', $request->get('page', 1), self::CACHE_VERSION);
 
         $data = Cache::remember($cacheKey, now()->addMinutes(self::CACHE_TTL), function () {
             return $this->carService
                 ->catalog()
-                ->getCatalog();
+                ->getCatalog()
+            ;
         });
 
         return $this->successResponse($data);

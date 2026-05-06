@@ -9,7 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $name
- * @property boolean $active
+ * @property bool   $active
+ *
  * @method static Builder active()
  */
 class Country extends Model

@@ -4,30 +4,20 @@ namespace App\Domains\Logger\Services\LoggerService;
 
 use App\Domains\Logger\Enums\LoggerTypeEnum;
 use App\Domains\Logger\Models\Logger;
-use Throwable;
 
 class LoggerService implements LoggerServiceInterface
 {
-    /**
-     * @param string $message
-     * @param LoggerTypeEnum $type
-     * @return void
-     */
     public function writeLog(string $message, LoggerTypeEnum $type): void
     {
         Logger::query()
             ->insert([
                 'message' => $message,
                 'type' => $type->value,
-            ]);
+            ])
+        ;
     }
 
-    /**
-     * @param Throwable $throwable
-     * @param LoggerTypeEnum $type
-     * @return void
-     */
-    public function writeLogThrowable(Throwable $throwable, LoggerTypeEnum $type): void
+    public function writeLogThrowable(\Throwable $throwable, LoggerTypeEnum $type): void
     {
         Logger::query()
             ->insert([
@@ -38,6 +28,7 @@ class LoggerService implements LoggerServiceInterface
                     'line' => $throwable->getLine(),
                 ], JSON_UNESCAPED_UNICODE),
                 'type' => $type->value,
-            ]);
+            ])
+        ;
     }
 }

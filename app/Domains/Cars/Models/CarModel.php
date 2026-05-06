@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @property string $name
- * @property int $year_from
- * @property int $year_to
- * @property int $car_id
- * @property boolean $active
+ * @property int    $year_from
+ * @property int    $year_to
+ * @property int    $car_id
+ * @property bool   $active
+ *
  * @method static Builder active()
  */
 class CarModel extends Model

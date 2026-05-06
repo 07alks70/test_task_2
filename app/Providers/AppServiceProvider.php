@@ -21,25 +21,31 @@ class AppServiceProvider extends ServiceProvider
         $this->app
             ->singleton(LoggerServiceInterface::class, function () {
                 return new LoggerService();
-            });
+            })
+        ;
 
         $this->app
             ->bind(GatewayCarInterface::class, function () {
                 $loggerService = Container::getInstance()
-                    ->get(LoggerServiceInterface::class);
+                    ->get(LoggerServiceInterface::class)
+                ;
 
                 return new ApiCarBase($loggerService);
-            });
+            })
+        ;
 
         $this->app
             ->singleton(CarServiceInterface::class, function () {
                 $carGatewayService = Container::getInstance()
-                    ->get(GatewayCarInterface::class);
+                    ->get(GatewayCarInterface::class)
+                ;
                 $loggerService = Container::getInstance()
-                    ->get(LoggerServiceInterface::class);
+                    ->get(LoggerServiceInterface::class)
+                ;
 
                 return new CarService($carGatewayService, $loggerService);
-            });
+            })
+        ;
     }
 
     /**
@@ -47,6 +53,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
     }
 }

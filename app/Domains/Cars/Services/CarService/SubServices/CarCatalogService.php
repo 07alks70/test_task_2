@@ -8,9 +8,6 @@ use App\Domains\Cars\Services\CarService\Interfaces\CarCatalogInterface;
 
 class CarCatalogService implements CarCatalogInterface
 {
-    /**
-     * @return array
-     */
     public function getCatalog(): array
     {
         $cars = Car::query()->paginate(10);

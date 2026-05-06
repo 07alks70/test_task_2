@@ -8,19 +8,15 @@ use Spatie\LaravelData\Data;
 
 class CarModelResponseDTO extends Data
 {
-    /**
-     * @param string $name
-     * @param int $yearFrom
-     * @param int $yearTo
-     */
     public function __construct(
         #[Rule(['required', 'string'])]
         public string $name,
         #[Rule(['required', 'integer'])]
         #[MapInputName('year_from')]
-        public int    $yearFrom,
+        public int $yearFrom,
         #[Rule(['required', 'integer'])]
         #[MapInputName('year_to')]
-        public int    $yearTo,
-    ) {}
+        public int $yearTo,
+    ) {
+    }
 }

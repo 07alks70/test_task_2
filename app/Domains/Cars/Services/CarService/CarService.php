@@ -12,26 +12,17 @@ use App\Domains\Logger\Services\LoggerService\LoggerServiceInterface;
 
 class CarService implements CarServiceInterface
 {
-    /**
-     * @param GatewayCarInterface $gatewayCar
-     * @param LoggerServiceInterface $loggerService
-     */
     public function __construct(
-        protected GatewayCarInterface    $gatewayCar,
+        protected GatewayCarInterface $gatewayCar,
         protected LoggerServiceInterface $loggerService,
-    ) {}
+    ) {
+    }
 
-    /**
-     * @return CarCatalogInterface
-     */
     public function catalog(): CarCatalogInterface
     {
         return new CarCatalogService();
     }
 
-    /**
-     * @return CarSyncServiceInterface
-     */
     public function synchronization(): CarSyncServiceInterface
     {
         return new CarSyncService($this->gatewayCar, $this->loggerService);
