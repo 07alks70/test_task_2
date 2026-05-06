@@ -12,7 +12,7 @@ class CarController extends Controller
 {
     use ResponseTrait;
 
-    protected const CACHE_VERSION = 1;
+    protected const CACHE_VERSION = 2;
     protected const CACHE_TTL = 60;
 
     public function __construct(
@@ -27,8 +27,7 @@ class CarController extends Controller
         $data = Cache::remember($cacheKey, now()->addMinutes(self::CACHE_TTL), function () {
             return $this->carService
                 ->catalog()
-                ->getCatalog()
-            ;
+                ->getCatalog();
         });
 
         return $this->successResponse($data);
